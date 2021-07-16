@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 
 const CityForm = ({onCitySubmit}) => {
-        
-    const [city, setCity] = useState("");
 
+    const [city, setCity] = useState("");
     const handleCityChange = e => setCity(e.target.value)
     const handleFormSubmit = (e) => {
         e.preventDefault();
