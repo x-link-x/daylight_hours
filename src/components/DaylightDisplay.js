@@ -1,8 +1,11 @@
 import React from 'react';
 
-const DaylightDisplay = () => {
+const DaylightDisplay = ({daylight}) => {
     return (
-        <p>Details go here</p>
+        <>
+        <p>Sunrise: {daylight.sunrise}</p>
+        <p>Sunset: {daylight.sunset}</p>
+        </>
     )
 }
 
