@@ -1,9 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import DaylightSelector from '../components/DaylightSelector';
 import DaylightDisplay from '../components/DaylightDisplay';
+import CityForm from '../components/CityForm';
 
 const DaylightContainer = () => {
     
+    const daylightAPI = () => {
+        fetch(`https://api.sunrise-sunset.org/json?lat=${lattitude}&lng=${longitude}&date=${day}`)
+            .then(res => res.json())
+            .then(json => setDaylight(json.results))
+    }
+
+    const geocodeAPI = () => {
+        fetch(`https://geocode.xyz/${city}?json=1`)
+            .then(res => res.json())
+            .then(json => {
+                setLattitude(json.latt)
+                setLongitude(json.longt)
+            })
+    }
+ 
     const formatDate = (date) => {
         const yyyy = date.getFullYear();
         const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -16,8 +32,8 @@ const DaylightContainer = () => {
     
     const [daylight, setDaylight] = useState({});
     const [day, setDay] = useState(today);
-    const [lattitude, setLattitude] = useState(36.7201600);
-    const [longitude, setLongitude] = useState(-4.4203400);
+    const [lattitude, setLattitude] = useState(0.0293);
+    const [longitude, setLongitude] = useState(-4.456);
 
     useEffect(() => {
         getDaylight();
@@ -25,11 +41,7 @@ const DaylightContainer = () => {
 
     const getDaylight = () => {
         console.log('getting daylight data');
-
-        fetch(`https://api.sunrise-sunset.org/json?lat=${lattitude}&lng=${longitude}&date=${day}`)
-            .then(res => res.json())
-            .then(json => setDaylight(json.results))
-           
+        daylightAPI();     
     }
 
     const getTomorrow = () => {
@@ -52,10 +64,12 @@ const DaylightContainer = () => {
     return (
         <>
             <h1>Sunrise and Sunset Information</h1>
+            <CityForm/>
             <DaylightSelector 
                 setTomorrow={() => getTomorrow()}
                 setYesterday={() => getYesterday()}
                 setToday={() => getToday()}
+                // onCitySubmit={}
             />
             <DaylightDisplay
                 daylight={daylight}
