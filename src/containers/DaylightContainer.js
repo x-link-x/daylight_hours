@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import DaylightSelector from '../components/DaylightSelector';
 import DaylightDisplay from '../components/DaylightDisplay';
 import CityForm from '../components/CityForm';
 
 const DaylightContainer = () => {
+<<<<<<< HEAD
     
     // const formatDate = (date) => {
     //     const yyyy = date.getFullYear();
@@ -96,6 +97,13 @@ const DaylightContainer = () => {
                 
             />
         
+=======
+    return (
+        <>
+            <h1>Sunrise and Sunset Information</h1>
+            <DaylightSelector/>
+            <DaylightDisplay/>
+>>>>>>> parent of 8c336ea (find sunset by long and lat)
         </>
 
     )
